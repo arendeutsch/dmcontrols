@@ -3,12 +3,20 @@ import PropTypes from 'prop-types';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import { withStyles } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
+    button: {
+        width: 'calc(100% - 250px)',
+    },
+    margin: {
+        margin: '10px',
+        width: 'calc(100% - 250px)',
+    },
     cssLabel: {
         color: grey[200],
         '&$cssFocused': {
@@ -27,6 +35,9 @@ const styles = theme => ({
     input: {
         color: 'white',
     },
+    contantForm: {
+        textAlign: 'center',
+    }
 });
 
 class Contact extends React.Component {
@@ -39,12 +50,33 @@ class Contact extends React.Component {
 
         this.state = {
             name: '',
+            email: '',
+            subject: '',
+            message: '',
         };
     }
 
     handleNameChange = (event) => {
         this.setState({
             name: event.target.value,
+        });
+    };
+
+    handleEmailChange = (event) => {
+        this.setState({
+            email: event.target.value,
+        });
+    };
+
+    handleSubjectChange = (event) => {
+        this.setState({
+            subject: event.target.value,
+        });
+    };
+
+    handleMessageChange = (event) => {
+        this.setState({
+            message: event.target.value,
         });
     };
 
@@ -66,24 +98,98 @@ class Contact extends React.Component {
                 </Map>
                 <div className="contact-form">
                     <h1>Get in touch</h1>
-                    <FormControl className={classes.margin}>
-                        <InputLabel
-                            FormLabelClasses={{
-                                root: classes.cssLabel,
-                                focused: classes.cssFocused,
-                            }}
-                            htmlFor="custom-css-input"
-                        >
-                            Your Name
-                        </InputLabel>
-                        <Input
-                            classes={{
-                                underline: classes.cssUnderline,
-                                input: classes.input,
-                            }}
-                            id="custom-css-input"
-                        />
-                    </FormControl>
+                    <Grid container={true} spacing={8} className={classes.contantForm}>
+                        <Grid item={true} xs={12} sm={6}>
+                            <FormControl className={classes.margin} required={true}>
+                                <InputLabel
+                                    FormLabelClasses={{
+                                        root: classes.cssLabel,
+                                        focused: classes.cssFocused,
+                                    }}
+                                    htmlFor="input-name"
+                                >Your Name</InputLabel>
+                                <Input
+                                    classes={{
+                                        underline: classes.cssUnderline,
+                                        input: classes.input,
+                                    }}
+                                    id="input-name"
+                                    value={this.state.name}
+                                    onChange={this.handleNameChange}
+                                    type="text"
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid item={true} xs={12} sm={6}>
+                            <FormControl className={classes.margin} required={true}>
+                                <InputLabel
+                                    FormLabelClasses={{
+                                        root: classes.cssLabel,
+                                        focused: classes.cssFocused,
+                                    }}
+                                    htmlFor="input-email"
+                                >Your Email</InputLabel>
+                                <Input
+                                    classes={{
+                                        underline: classes.cssUnderline,
+                                        input: classes.input,
+                                    }}
+                                    id="input-email"
+                                    value={this.state.email}
+                                    onChange={this.handleEmailChange}
+                                    type="text"
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid item={true} xs={12}>
+                            <FormControl className={classes.margin} required={true}>
+                                <InputLabel
+                                    FormLabelClasses={{
+                                        root: classes.cssLabel,
+                                        focused: classes.cssFocused,
+                                    }}
+                                    htmlFor="input-subject"
+                                >Subject</InputLabel>
+                                <Input
+                                    classes={{
+                                        underline: classes.cssUnderline,
+                                        input: classes.input,
+                                    }}
+                                    id="input-subject"
+                                    value={this.state.subject}
+                                    onChange={this.handleSubjectChange}
+                                    type="text"
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid item={true} xs={12}>
+                            <FormControl className={classes.margin} required={true}>
+                                <InputLabel
+                                    FormLabelClasses={{
+                                        root: classes.cssLabel,
+                                        focused: classes.cssFocused,
+                                    }}
+                                    htmlFor="input-message"
+                                >Your Message</InputLabel>
+                                <Input
+                                    classes={{
+                                        underline: classes.cssUnderline,
+                                        input: classes.input,
+                                    }}
+                                    multiline={true}
+                                    id="input-message"
+                                    value={this.state.message}
+                                    onChange={this.handleMessageChange}
+                                    type="text"
+                                />
+                            </FormControl>
+                        </Grid>
+                        <Grid item={true} xs={12}>
+                            <Button variant="contained" color="primary" className={classes.button}>
+                                Send Email
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </div>
             </div>
         )
