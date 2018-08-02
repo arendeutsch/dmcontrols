@@ -53,30 +53,110 @@ class Contact extends React.Component {
             email: '',
             subject: '',
             message: '',
+            disableSendBtn: true,
+            nameError: true,
+            emailError: true,
+            subjectError: true,
+            messageError: true,
         };
     }
+    regEx = new RegExp('^[a-zA-Z0-9.!#$%&\'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$');
 
-    handleNameChange = (event) => {
+    handleEmailChange = (event) => {
+        const email = event.target.value;
         this.setState({
-            name: event.target.value,
+            email: email,
+            emailError: !this.regEx.test(email),
+        }, ()=> {
+            if (!this.state.nameError
+                && !this.state.emailError
+                && !this.state.subjectError
+                && !this.state.messageError) {
+                this.setState({
+                    disableSendBtn: false,
+                });
+            } else {
+                this.setState({
+                    disableSendBtn: true,
+                });
+            }
         });
     };
 
-    handleEmailChange = (event) => {
+    handleNameChange = (event) => {
+        const name = event.target.value;
         this.setState({
-            email: event.target.value,
+            name: name,
+            nameError: !(name.length > 2),
+        }, ()=> {
+            if (!this.state.nameError
+                && !this.state.emailError
+                && !this.state.subjectError
+                && !this.state.messageError) {
+                this.setState({
+                    disableSendBtn: false,
+                });
+            } else {
+                this.setState({
+                    disableSendBtn: true,
+                });
+            }
         });
     };
 
     handleSubjectChange = (event) => {
+        const subject = event.target.value;
         this.setState({
-            subject: event.target.value,
+            subject: subject,
+            subjectError: !(subject.length > 2),
+        }, ()=> {
+            if (!this.state.nameError
+                && !this.state.emailError
+                && !this.state.subjectError
+                && !this.state.messageError) {
+                this.setState({
+                    disableSendBtn: false,
+                });
+            } else {
+                this.setState({
+                    disableSendBtn: true,
+                });
+            }
         });
     };
 
     handleMessageChange = (event) => {
+        const msg = event.target.value;
         this.setState({
-            message: event.target.value,
+            message: msg,
+            messageError: !(msg.length > 2),
+        }, ()=> {
+            if (!this.state.nameError
+                && !this.state.emailError
+                && !this.state.subjectError
+                && !this.state.messageError) {
+                this.setState({
+                    disableSendBtn: false,
+                });
+            } else {
+                this.setState({
+                    disableSendBtn: true,
+                });
+            }
+        });
+    };
+
+    handleClearFields = () => {
+        this.setState({
+            name: '',
+            nameError: true,
+            email: '',
+            emailError: true,
+            subject: '',
+            subjectError: true,
+            message: '',
+            messageError: true,
+            disableSendBtn: true,
         });
     };
 
@@ -100,7 +180,7 @@ class Contact extends React.Component {
                     <h1>Get in touch</h1>
                     <Grid container={true} spacing={8} className={classes.contantForm}>
                         <Grid item={true} xs={12} sm={6}>
-                            <FormControl className={classes.margin} required={true}>
+                            <FormControl className={classes.margin} required={true} error={this.state.nameError}>
                                 <InputLabel
                                     FormLabelClasses={{
                                         root: classes.cssLabel,
@@ -121,7 +201,7 @@ class Contact extends React.Component {
                             </FormControl>
                         </Grid>
                         <Grid item={true} xs={12} sm={6}>
-                            <FormControl className={classes.margin} required={true}>
+                            <FormControl className={classes.margin} required={true} error={this.state.emailError}>
                                 <InputLabel
                                     FormLabelClasses={{
                                         root: classes.cssLabel,
@@ -142,7 +222,7 @@ class Contact extends React.Component {
                             </FormControl>
                         </Grid>
                         <Grid item={true} xs={12}>
-                            <FormControl className={classes.margin} required={true}>
+                            <FormControl className={classes.margin} required={true} error={this.state.subjectError}>
                                 <InputLabel
                                     FormLabelClasses={{
                                         root: classes.cssLabel,
@@ -163,7 +243,7 @@ class Contact extends React.Component {
                             </FormControl>
                         </Grid>
                         <Grid item={true} xs={12}>
-                            <FormControl className={classes.margin} required={true}>
+                            <FormControl className={classes.margin} required={true} error={this.state.messageError}>
                                 <InputLabel
                                     FormLabelClasses={{
                                         root: classes.cssLabel,
@@ -177,6 +257,7 @@ class Contact extends React.Component {
                                         input: classes.input,
                                     }}
                                     multiline={true}
+                                    rows={5}
                                     id="input-message"
                                     value={this.state.message}
                                     onChange={this.handleMessageChange}
@@ -184,9 +265,25 @@ class Contact extends React.Component {
                                 />
                             </FormControl>
                         </Grid>
-                        <Grid item={true} xs={12}>
-                            <Button variant="contained" color="primary" className={classes.button}>
+                        <Grid item={true} xs={12} sm={6}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                className={classes.button}
+                                disabled={this.state.disableSendBtn}
+                                onClick={this.handleSendEmail}
+                            >
                                 Send Email
+                            </Button>
+                        </Grid>
+                        <Grid item={true} xs={12} sm={6}>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                className={classes.button}
+                                onClick={this.handleClearFields}
+                            >
+                                Clear fields
                             </Button>
                         </Grid>
                     </Grid>
