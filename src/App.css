@@ -1,0 +1,79 @@
+.landing-page, .footer, .header-color {
+  background: #141E30;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.mdl-layout__header-row .mdl-layout-title  {
+  font-family: 'Fredericka the Great';
+  font-size: 3.2em;
+}
+
+.mdl-layout__header-row .mdl-navigation__link {
+  font-family: 'Sriracha';
+  font-size: 1.3em;
+}
+
+.mdl-layout__inner-container .mdl-layout__drawer .mdl-layout-title {
+  font-family: 'Fredericka the Great';
+  font-size: 1.2em;
+}
+
+.mdl-navigation .mdl-navigation__link {
+  font-family: 'Sriracha';
+  font-size: 1.3em;
+}
+
+.landing-img {
+  width: 100%;
+  height: auto;
+  padding-top: 3em;
+}
+
+.banner-text {
+  background-color: black;
+  opacity: 0.8;
+  width: 75%;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.banner-text h1 {
+  font-size: 3em;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+.banner-text hr {
+  border-top: 5px dotted white;
+  width: 75%;
+  margin: auto;
+}
+
+.leaflet-container {
+  height: 600px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.contant-page {
+  padding: 10px;
+  width: 100%;
+  margin: auto;
+  background: #141E30;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.mdl-mini-footer__middle-section .mdl-logo {
+  text-align: center;
+}
+
+.contact-form h1 {
+  font-size: 3em;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+}
