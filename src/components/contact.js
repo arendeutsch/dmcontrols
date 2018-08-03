@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 const styles = theme => ({
     button: {
@@ -160,6 +161,21 @@ class Contact extends React.Component {
         });
     };
 
+    handleSendEmail = () => {
+        axios.post('http://localhost:8080/sendMail', {
+            name: this.state.name,
+            email: this.state.email,
+            subject: this.state.subject,
+            message: this.state.message,
+        })
+            .then((response) => {
+                console.log('message sent');
+            })
+            .catch((error) => {
+                console.log('error sending mail');
+            });
+    };
+
     render() {
         const position = [31.9771, 34.7987];
         const { classes } = this.props;
@@ -283,7 +299,7 @@ class Contact extends React.Component {
                                 className={classes.button}
                                 onClick={this.handleClearFields}
                             >
-                                Clear fields
+                                Clear Fields
                             </Button>
                         </Grid>
                     </Grid>
